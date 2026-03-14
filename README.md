@@ -27,7 +27,7 @@ A cross-platform C/C++ tool and library for parsing multi-language projects usin
 # 1. Fetch dependencies (requires curl, run once)
 ./scripts/fetch-deps.sh
 
-# 2. Build
+# 2. Build (from project root)
 mkdir build && cd build
 cmake ..
 cmake --build .
@@ -35,27 +35,39 @@ cmake --build .
 
 ### Install
 
+Run from the project root:
+
 ```bash
+# Option A: Install to /usr/local (requires sudo)
+sudo cmake --build build --target install
+
+# Option B: Install to user directory (no sudo)
+cmake -B build -DCMAKE_INSTALL_PREFIX=$HOME/.local
 cmake --build build --target install
+# Add to PATH if needed: export PATH="$HOME/.local/bin:$PATH"
 ```
+
+After install, the `mcp` binary is available in your PATH. To run without installing, use `./build/mcp` from the project root (paths are relative to your current directory).
 
 ## Usage
 
 ### CLI
 
 ```bash
-# Parse a single file and output JSON
-./mcp parse tests/sample.py
+# From project root (after install, or use ./build/mcp without install)
+mcp parse tests/sample.py
 
 # Parse and show human-readable output
-./mcp parse tests/sample.py --format text
+mcp parse tests/sample.py --format text
 
 # List functions and classes
-./mcp list-functions tests/sample.js
+mcp list-functions tests/sample.js
 
 # Build dependency graph for a directory
-./mcp deps tests/
+mcp deps tests/
 ```
+
+When running from the `build/` directory, use relative paths like `../tests/sample.py`.
 
 ### C API Example
 
