@@ -1,6 +1,6 @@
 #!/bin/sh
 # Fetch Tree Sitter dependencies
-# Run from mcp-prototype directory: ./scripts/fetch-deps.sh
+# Run from metacall-parser directory: ./scripts/fetch-deps.sh
 
 set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
